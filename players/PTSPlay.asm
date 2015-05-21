@@ -1347,15 +1347,15 @@ PL_nts
 	ENDIF
 
 ROUT	LD BC,#FFFD
+  LD A,(is_ts)
+	AND A
   IFDEF ONtfm
     LD L,#F9
     OUT (C),L
   ELSE
-	LD A,(is_ts)
-	AND A
-	JR Z,r_nts ;keep old standard
-	OUT (C),B
-    ENDIF
+  	JR Z,r_nts ;keep old standard
+	  OUT (C),B
+  ENDIF
 r_nts	EX AF,AF'
 
 	IF ACBBAC

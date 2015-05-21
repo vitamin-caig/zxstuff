@@ -108,11 +108,11 @@ jp_bc   push bc
 ;out a - chunkid
 ;out hl - chunk data start
 ;out bc - chunk data size
+;corrupt de
 ParseChunk
-        ld de,Chunks
+        ld de,ChunkId
 .checkid
         ld b,4
-        push hl
         dup 4
         ld a,(de)
         inc e
@@ -127,7 +127,7 @@ ParseChunk
         jr z,.matched
         cp ChunkId.Unknown
         jr z,.getdata
-        pop hl
+        dec hl,hl,hl,hl
         jr .checkid
 .matched
         sub 4
@@ -139,11 +139,6 @@ ParseChunk
         inc hl
         ld c,(hl)
         inc hl
-        ;chunk is always aligned at word boundary, so correct length
-        bit 0,c
-        jr z,$+3
-        inc bc
-        pop de
         ret
 
 ;put streams in gap
@@ -153,7 +148,7 @@ MinStreamsCount=3 ;approx: ts+tfm
 Streams.End
         display "MTC: loosed ",256-low $," bytes"
         align 256
-Chunks
+
 ChunkId
 .MTC1=low $
         db "MTC1"
@@ -171,8 +166,15 @@ ChunkId
         db "PROP"
 .Unknown=low $
 
-MaxStreamsCount=(Chunks-Streams)/StreamData
+MaxStreamsCount=(ChunkId-Streams)/StreamData
         display "MTC: max streams ",MaxStreamsCount
+
+        macro MoveNextChunk
+        ;chunk is always aligned at word boundary, so correct odd length
+        push bc
+        pop af
+        adc hl,bc
+        endm
         
 ;in hl - content
 ;in bc - size
@@ -187,14 +189,14 @@ ParseMTC1
         cp ChunkId.TRCK
         call z,ParseTrack
         pop bc,hl
-        add hl,bc
-        pop de
+        MoveNextChunk
+        pop bc
         ;hl- end of chunk
         ;de- end of avail
-        sbc hl,de
+        sbc hl,bc
         ret z ;last chunk
-        add hl,de
-        push de
+        add hl,bc
+        push bc
         jr .nextchunk
 
 ;in hl - content
@@ -209,18 +211,21 @@ ParseTrack
         push hl,bc
         cp ChunkId.DATA
         call z,ParseData
+        exa
         pop bc,hl
-        add hl,bc
-        pop de
+        MoveNextChunk
+        pop bc
+        exa
         ret z ;data is parsed
         ;hl- end of chunk
         ;de- end of avail
-        sbc hl,de
+        and a
+        sbc hl,bc
         ret z ;last chunk
-        add hl,de
-        push de
+        add hl,bc
+        push bc
         jr .nextchunk
-
+        
 ;in hl - content
 ;in bc - size        
 ;out Z - data parsed and added as stream

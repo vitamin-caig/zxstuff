@@ -36,23 +36,24 @@
 031+  6032                   define MTC_MYSTICAL "mystical.mtc"
 032+  6032                   define MTC_NEWOLD "newold.mtc"
 033+  6032                   define MTC_SNEGURKA "Snegurka.mtc"
-034+  6032             
-035+  6032                   define TFC_CYBERMOTION MTC_CYBERMOTION,0x76
-036+  6032                   define TFC_DRUMTEST MTC_DRUMTEST,0xa90
-037+  6032                   define TFC_MUG MTC_MUG,0x52
-038+  6032                   define TFC_MYSTICAL MTC_MYSTICAL,0xcd4
-039+  6032                   define TFC_NEWOLD MTC_NEWOLD,0x263a
-040+  6032                   define TFC_SNEGURKA MTC_SNEGURKA,0x52
-041+  6032             
-042+  6032                   define PT3_DRUMTEST MTC_DRUMTEST,0x52
-043+  6032                   define PT3_MYSTICAL MTC_MYSTICAL,0x52
-044+  6032                   define PT3_NEWOLD MTC_NEWOLD,0x52
-045+  6032                   define PT3_SNEGURKA MTC_SNEGURKA,0xaa4
-046+  6032             
-047+  6032                   define TS_INEEDREST "INEEDREST.ts"
-048+  6032             
-049+  6032                   define PT2_PITON "PITON.pt2"
-050+  6032                   
+034+  6032                   define MTC_INDEEDREST "ineedrest.mtc"
+035+  6032             
+036+  6032                   define TFC_CYBERMOTION MTC_CYBERMOTION,0x76
+037+  6032                   define TFC_DRUMTEST MTC_DRUMTEST,0xa90
+038+  6032                   define TFC_MUG MTC_MUG,0x52
+039+  6032                   define TFC_MYSTICAL MTC_MYSTICAL,0xcd4
+040+  6032                   define TFC_NEWOLD MTC_NEWOLD,0x263a
+041+  6032                   define TFC_SNEGURKA MTC_SNEGURKA,0x52
+042+  6032             
+043+  6032                   define PT3_DRUMTEST MTC_DRUMTEST,0x52
+044+  6032                   define PT3_MYSTICAL MTC_MYSTICAL,0x52
+045+  6032                   define PT3_NEWOLD MTC_NEWOLD,0x52
+046+  6032                   define PT3_SNEGURKA MTC_SNEGURKA,0xaa4
+047+  6032             
+048+  6032                   define TS_INEEDREST "ineedrest.mtc",0x52
+049+  6032             
+050+  6032                   define PT2_PITON "PITON.pt2"
+051+  6032                   
 006   6032                   
 007   6032                   org #c000
 008   C000             player      

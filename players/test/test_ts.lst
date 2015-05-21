@@ -36,23 +36,24 @@
 0031+  6032                   define MTC_MYSTICAL "mystical.mtc"
 0032+  6032                   define MTC_NEWOLD "newold.mtc"
 0033+  6032                   define MTC_SNEGURKA "Snegurka.mtc"
-0034+  6032             
-0035+  6032                   define TFC_CYBERMOTION MTC_CYBERMOTION,0x76
-0036+  6032                   define TFC_DRUMTEST MTC_DRUMTEST,0xa90
-0037+  6032                   define TFC_MUG MTC_MUG,0x52
-0038+  6032                   define TFC_MYSTICAL MTC_MYSTICAL,0xcd4
-0039+  6032                   define TFC_NEWOLD MTC_NEWOLD,0x263a
-0040+  6032                   define TFC_SNEGURKA MTC_SNEGURKA,0x52
-0041+  6032             
-0042+  6032                   define PT3_DRUMTEST MTC_DRUMTEST,0x52
-0043+  6032                   define PT3_MYSTICAL MTC_MYSTICAL,0x52
-0044+  6032                   define PT3_NEWOLD MTC_NEWOLD,0x52
-0045+  6032                   define PT3_SNEGURKA MTC_SNEGURKA,0xaa4
-0046+  6032             
-0047+  6032                   define TS_INEEDREST "INEEDREST.ts"
-0048+  6032             
-0049+  6032                   define PT2_PITON "PITON.pt2"
-0050+  6032                   
+0034+  6032                   define MTC_INDEEDREST "ineedrest.mtc"
+0035+  6032             
+0036+  6032                   define TFC_CYBERMOTION MTC_CYBERMOTION,0x76
+0037+  6032                   define TFC_DRUMTEST MTC_DRUMTEST,0xa90
+0038+  6032                   define TFC_MUG MTC_MUG,0x52
+0039+  6032                   define TFC_MYSTICAL MTC_MYSTICAL,0xcd4
+0040+  6032                   define TFC_NEWOLD MTC_NEWOLD,0x263a
+0041+  6032                   define TFC_SNEGURKA MTC_SNEGURKA,0x52
+0042+  6032             
+0043+  6032                   define PT3_DRUMTEST MTC_DRUMTEST,0x52
+0044+  6032                   define PT3_MYSTICAL MTC_MYSTICAL,0x52
+0045+  6032                   define PT3_NEWOLD MTC_NEWOLD,0x52
+0046+  6032                   define PT3_SNEGURKA MTC_SNEGURKA,0xaa4
+0047+  6032             
+0048+  6032                   define TS_INEEDREST "ineedrest.mtc",0x52
+0049+  6032             
+0050+  6032                   define PT2_PITON "PITON.pt2"
+0051+  6032                   
 0006   6032                   
 0007   6032                   org #c000
 0008   C000             player      
@@ -1503,15 +1504,15 @@
 1347++ C893             	ENDIF
 1348++ C893             
 1349++ C893 01 FD FF    ROUT	LD BC,#FFFD
-1350++ C896               IFDEF ONtfm
-1351++ C896~                LD L,#F9
-1352++ C896~                OUT (C),L
-1353++ C896               ELSE
-1354++ C896 3A 4E C9    	LD A,(is_ts)
-1355++ C899 A7          	AND A
-1356++ C89A 28 02       	JR Z,r_nts ;keep old standard
-1357++ C89C ED 41       	OUT (C),B
-1358++ C89E                 ENDIF
+1350++ C896 3A 4E C9      LD A,(is_ts)
+1351++ C899 A7          	AND A
+1352++ C89A               IFDEF ONtfm
+1353++ C89A~                LD L,#F9
+1354++ C89A~                OUT (C),L
+1355++ C89A               ELSE
+1356++ C89A 28 02         	JR Z,r_nts ;keep old standard
+1357++ C89C ED 41       	  OUT (C),B
+1358++ C89E               ENDIF
 1359++ C89E 08          r_nts	EX AF,AF'
 1360++ C89F             
 1361++ C89F             	IF ACBBAC
@@ -1864,10 +1865,10 @@
 0013   CC0D             
 0014   CC0D             module      
 0015   CC0D                   incbin TS_INEEDREST
-0016   F5D6             
-0017   F5D6                   savesna "test_ts.sna",begin
-0018   F5D6                   savebin "../ts_c000.bin",player,module-player
-0019   F5D6             
+0016   F5F5             
+0017   F5F5                   savesna "test_ts.sna",begin
+0018   F5F5                   savebin "../ts_c000.bin",player,module-player
+0019   F5F5             
 
 Value    Label
 ------ - -----------------------------------------------------------
